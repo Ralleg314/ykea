@@ -1,0 +1,80 @@
+[
+  {
+    "model": "ykea.Item",
+    "pk": 1,
+    "fields": {
+      "item_number": "09186777",
+      "name": "KONGSWDFJORD",
+      "description" :"Divan bed, Hyllestad firm, Tustna dark grey",
+      "price" : "1488",
+      "is_new" : "True",
+      "size" : "160x200 cm",
+      "category" : "beds"
+    }
+  },
+   {
+   "model": "ykea.Item",
+    "pk": 2,
+    "fields": {
+      "item_number": "70294339",
+      "name": "LISBAÖFJK",
+      "description" :"Table, ash veneer and more",
+      "price" : "99",
+      "is_new" : "False",
+      "size" : "140x78 cm",
+      "category" : "table"
+    }
+  },
+   {
+   "model": "ykea.Item",
+    "pk": 3,
+    "fields": {
+      "item_number": "33333",
+      "name": "LISBA",
+      "description" :"Table, ash",
+      "price" : "99",
+      "is_new" : "False",
+      "size" : "140x78 cm",
+      "category" : "beds"
+    }
+  },
+   {
+   "model": "ykea.Item",
+    "pk": 4,
+    "fields": {
+      "item_number": "44444",
+      "name": "AÖFJK",
+      "description" :"Table, veneer",
+      "price" : "99",
+      "is_new" : "False",
+      "size" : "140x78 cm",
+      "category" : "beds"
+    }
+  },
+   {
+   "model": "ykea.Item",
+    "pk": 5,
+    "fields": {
+      "item_number": "55555",
+      "name": "JFK",
+      "description" :"ash veneer",
+      "price" : "99",
+      "is_new" : "False",
+      "size" : "140x78 cm",
+      "category" : "table"
+    }
+  },
+  {
+    "model": "ykea.Item",
+    "pk": 6,
+    "fields": {
+      "item_number": "2472777",
+      "name": "Kma Maincra",
+      "description" :"Se duerme mu vien i te salba de los creepers",
+      "price" : "6",
+      "is_new" : "True",
+      "size" : "2x1 cm",
+      "category" : "beds"
+    }
+  }
+] 

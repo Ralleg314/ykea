@@ -1,0 +1,89 @@
+<head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+    
+    .list-group {
+        width: 18%;
+            }
+    .navbar-brand
+    {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        margin:0 auto;
+    }
+    .navbar-toggle {
+        z-index:3;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>    
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a class="navbar-brand" href="{% url 'index' %}">ykea ></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated %}
+            
+                <li><a class="navbar-brand">Hola {{request.user}}</a></li>
+                <li><a class="navbar-brand">{{money}}€</a></li>
+                <li><a class="navbar-brand" href="{% url 'logout_view'%}">Log Out</a></li>
+            {% else %}
+                <li><a class="navbar-brand" href="{% url 'login_view'%}">Log In</a></li>
+                <li><a class="navbar-brand" href="{% url 'register'%}">Register</a></li>
+            {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div>        
+        {% if cartItems %}
+            <form action="{% url 'process'%}" method="post">
+            {% csrf_token %}
+            {% for itemcart in cartItems %}
+                <label><input type= checkbox name="checkbox{{ itemcart.item.item_number }}" id="checkbox{{ itemcart.item.item_number }}" value="{{ itemcart.item.item_number }}"/> 
+                <a href="{% url 'itemproduct' itemcart.item.item_number %}"> {{itemcart.item.name}} </a>
+                <br>
+                Price: {{itemcart.item.price}} €
+                <br>
+                Quantity: <select name="qty">
+                            <option value="0">0</option>
+                            <option selected="selected" value="1">1</option> 
+                            <option value="2">2</option> 
+                            <option value="3">3</option>
+                            <option value="4">4</option> 
+                            <option value="5">5</option> 
+                            <option value="6">6</option> 
+                            <option value="7">7</option> 
+                            <option value="8">8</option> 
+                            <option value="9">9</option> 
+                          </select>
+                </label>   
+                <br>
+                <br>
+            {% endfor %}
+            <input type="submit" name="checkOutButton" value="Check Out" /> <input type="submit" name="deleteButton" value="Remove from cart" />
+        	</form>
+        {% else %}
+            <p>No items are available.</p>
+        {% endif %}
+    </div>
+</body>
