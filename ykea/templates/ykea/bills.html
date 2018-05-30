@@ -44,30 +44,35 @@
         <ul class="nav navbar-nav navbar-right">
             {% if request.user.is_authenticated %}
                 <li><a class="navbar-brand">Hola {{request.user}}</a></li>
-                {% if money %}
-                    <li><a class="navbar-brand">{{money}}€</a></li>
-                {% endif %}
+                <li><a class="navbar-brand">{{money}}€</a></li>
                 <li><a class="navbar-brand" href="{% url 'bills' %}">History</a></li>
-                <li><a class="navbar-brand" href="{% url 'logout_view'%}?next={{request.path}}">Log Out</a></li>
+                <li><a class="navbar-brand" href="{% url 'logout_view'%}">Log Out</a></li>
             {% else %}
-                <li><a class="navbar-brand" href="{% url 'login_view'%}?next={{request.path}}">Log In</a></li>
-                <li><a class="navbar-brand" href="{% url 'register'%}?next={{request.path}}">Register</a></li>
+                <li><a class="navbar-brand" href="{% url 'login_view'%}">Log In</a></li>
+                <li><a class="navbar-brand" href="{% url 'register'%}">Register</a></li>
             {% endif %}
         </ul>
       </div>
     </nav>
     
-    <div class="list-group">
-    {% if items %}
-            <ul >
-            {% for item, description in items %}
-                <li class="list-group-item"><a href="{% url 'items' item%}"> {{item}} </a> : {{description}} </a></li>
+    <div>
+
+        {% if bills %}
+            {% for bill in bills %}
+                <label>
+                PRODUCTOS:
+                {% for line in bill.billitem_set.all %}
+                    <br> &nbsp&nbsp&nbsp&nbsp -{{line.item.name}} :: amount  {{line.quantity}} 
+                {% endfor %}
+                <br>
+                TOTAL: {{bill.total}}
+                </label>   
+                <br>
+                <br>
             {% endfor %}
-            </ul>
         {% else %}
-            <p>No categories are available.</p>
+            <p>No bills found.</p>
         {% endif %}
-    </div>
     
-    
+    </div> 
 </body>

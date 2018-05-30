@@ -1,0 +1,156 @@
+<head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+    
+    .list-group {
+        width: 18%;
+            }
+    .navbar-brand
+    {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        margin:0 auto;
+    }
+    .navbar-toggle {
+        z-index:3;
+    }
+    
+    .vcenter {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>    
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a class="navbar-brand" href="{% url 'index' %}">ykea ></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated %}
+                <li><a class="navbar-brand">Hola {{request.user}}</a></li>
+                {% if money %}
+                    <li><a class="navbar-brand">{{money}}€</a></li>
+                {% endif %}
+                <li><a class="navbar-brand" href="{% url 'logout_view'%}?next={{request.path}}">Log Out</a></li>
+            {% else %}
+                <li><a class="navbar-brand" href="{% url 'login_view'%}?next={{request.path}}">Log In</a></li>
+                <li><a class="navbar-brand" href="{% url 'register'%}?next={{request.path}}">Register</a></li>
+            {% endif %}
+        </ul>
+      </div>
+    </nav>
+    
+    <form action="/ykea/comparator/">
+    <br>
+    <left>
+        Categories: <select name="category">
+        <option selected value=""> -- </option>
+                        {% if items %}
+                                <ul >
+                                {% for item, description in items %}
+                                    <option value=item>{{item}}</option>
+                                {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No categories are available.</p>
+                            {% endif %}
+        
+        </select>
+    </left>
+    <br>
+    <left>
+        <label for="new">New:  </label>
+        <input name="is_new" value="True" type="checkbox">
+    </left>
+
+    <!--I use a default value for price-->
+    <left>
+        <div class="form-row">
+            <label for="c1">Max price</label>
+            <input type="number" value="1000" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="c1" name="price"/>
+        </div>
+    </left>
+
+    <left><input value="Compare" class="btn btn-info btn-sm" type="submit"></left>
+    <br>
+</form>
+</body>
+
+<script type='text/javascript'>
+function callFacebook() {
+    var requests = [];
+    var ips = {{ips|safe}};
+    var results = [];
+    for (var i=0; i<ips.length; i++) {
+        $("pp").html(departure);
+        requests.push(
+            $.ajax(
+                {
+                    url: 'http://' + ips[i] + ':8080/api/flights/?format=json&departure=' + departure + '',
+                    type : 'GET',
+                    dataType : 'json',
+                    error : function(jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    er = jqXHR.responsetext
+                    alert (msg)
+                    $( "<h3>" ).text(msg ).appendTo( "body" );
+                    console.log( "Error: " + msg )
+                        },
+                        success: function(data){
+                        dep = "url: "+ data['results'][0]['url']
+                        alert(dep)
+                        flight = "Flight: " + data['results'][0]['flight_number']
+                        + ", Departure: " + data['results'][0]['location_departure']
+                        + ", Arrival: " +
+                        data['results'][0]['location_arrival']
+                        + ", Price: " + data['results'][0]['price']
+                        $( "<h2>" ).text(dep ).appendTo( "body" );
+                        $( "<h3>" ).text(flight ).appendTo( "body" );
+                    }
+                }
+            )
+        );
+    }
+    $.when.apply($, requests).done(function() {
+    // iterate over request response
+    alert("hola")
+    });
+}
+</script>
