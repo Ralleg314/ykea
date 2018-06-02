@@ -231,7 +231,7 @@ def view_bills(request):
    
 def comparator(request, ips):
     items = Item.CATEGORIES
-    context = {'ips':ips}
+    context = {'items':items,'ips':ips}
     
     return render(request, 'ykea/comparator.html', context)
 
