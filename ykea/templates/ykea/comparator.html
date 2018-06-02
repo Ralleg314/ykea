@@ -169,3 +169,42 @@
 		}
 	}
 </script>
+
+<script>
+	
+	function display_results(results) {
+		// Clear last results
+		$("#results").html("");
+
+		if (results.length == 0) {
+			$("#results").append($("<h1>").text("Nothing found :("));
+			return;
+		}
+		
+		// Sort results by price
+		results.sort(function(a, b) {
+			var x = parseInt(a['price']);
+			var y = parseInt(b['price']);
+			return x - y;
+		});
+		
+		// Show results
+		var name, description, img, price, origin;
+		for (var i=0; i < results.length; i++) {
+			name = results[i]['name'];
+			description = results[i]['description'];
+			price = results[i]['price'];
+			img = results[i]['featured_photo'];
+			origin = results[i]['origin']
+			
+			// Escape them
+			name = $("<div/>").text(name).html();
+			description = $("<div/>").text(description).html();
+			price = $("<div/>").text(price).html();
+			img = $("<div/>").text(img).html();
+
+			$("#results").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='http://" + origin + "/ykea'>" + origin + "/ykea</a>!</p></div></div>"));
+		}
+	}
+    
+</script>
