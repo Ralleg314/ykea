@@ -3,7 +3,7 @@ from django.contrib.auth.views import login, logout
 from rest_framework import routers
 from . import views
 
-listOfAddresses = ['localhost',"sd2018-ykea-a1.herokuapp.com"]
+listOfAddresses = ["sd2018-ykea-a1.herokuapp.com",'sd2018-ykea-a9.herokuapp.com', 'sd2018-ykeaa4.herokuapp.com']
 
 urlpatterns = [
     url(r'^shoppingcart/$', views.shoppingcart, name='shoppingcart'),
@@ -17,5 +17,5 @@ urlpatterns = [
     url(r'^accounts/login/*', login , name='login_view'),
     url(r'^accounts/logout/*', logout, name='logout_view'),
     url(r'^register/$', views.register, name='register'),
-    url(r'^comparator$', views.comparator,  name='comparator'),
+    url(r'^comparator$', views.comparator, {'ips': listOfAddresses}, name='comparator'),
 ]
