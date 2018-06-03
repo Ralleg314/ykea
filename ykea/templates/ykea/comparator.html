@@ -62,32 +62,68 @@
       </div>
     </nav>
     
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-	  <ul class="navbar-nav ml-auto">
-		<li class="nav-item">
-		  <a class="nav-link" href="/ykea/">Home</a>
-		</li>
+<br>
+    <h1>Comparator</h1>
+    <!-- Comparator parameters -->
+    Category:
+    <select id="categorySelect">
 		
+			<option value="beds">Beds &amp; mattressess</option>
 		
+			<option value="cook">Cookware</option>
 		
-		<li class="nav-item active">
-		  <a class="nav-link" href="/ykea/comparator">Comparator
-			<span class="sr-only">(current)</span>
-		  </a>
-		</li>
+			<option value="deco">Decoration &amp; mirrors</option>
 		
+			<option value="diy">Do-it-yourself</option>
 		
-		<li class="nav-item">
-		  <a class="nav-link" href="/ykea/accounts/login/">Login</a>
-		</li>
-		<li class="nav-item">
-		  <a class="nav-link" href="/ykea/accounts/register/">Register</a>
-		</li>
+			<option value="floor">Flooring</option>
 		
+			<option value="food">Food &amp; beverages</option>
 		
-	  </ul>
-	</div>
-</body>
+			<option value="furn">Furniture, wardrobes &amp; shelves</option>
+		
+			<option value="leis">Leisure</option>
+		
+			<option value="light">Lighting</option>
+		
+			<option value="org">Organisers &amp; storage accesories</option>
+		
+			<option value="plant">Plants &amp; gardering</option>
+		
+			<option value="safe">Safety</option>
+		
+			<option value="sofa">Sofas &amp; armchairs</option>
+		
+			<option value="table">Tables &amp; chairs</option>
+		
+			<option value="tablw">Tableware</option>
+		
+			<option value="taps">Taps &amp; sinks</option>
+		
+			<option value="texti">Textiles</option>
+		
+			<option value="toys">Toys</option>
+		
+    </select>
+    <br><br>
+    <label><input id="new" type="checkbox"> Only new</label>
+    <br><br>
+    Price lower than:
+    <input id="price" min="0" step="0.1" type="number">
+    <br><br>
+    
+    <button class="comparator" id="compare">Compare!</button>
+    <br><br>
+    
+    <!-- Comparator results -->
+    <div id="results">
+    
+    </div>
+        
+    <!-- Bootstrap core JavaScript -->
+    <script src="/static/ykea/vendor/jquery/jquery.js"></script>
+    <script src="/static/ykea/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
 
@@ -202,3 +238,5 @@
 		)
 	
 </script>
+
+</body>
