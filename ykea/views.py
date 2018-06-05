@@ -235,7 +235,7 @@ def comparator(request, ips):
     
     return render(request, 'ykea/comparator.html', context)
 
-@permission_classes((IsCommercialOrReadOnly, ))
+#@permission_classes((IsCommercialOrReadOnly, ))
 class ItemViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Items to be viewed or edited.
