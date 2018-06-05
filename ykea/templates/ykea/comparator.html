@@ -102,27 +102,6 @@
 
 <script type="text/javascript">
 
-function principal(){
-    var x = document.URL;
-    answer = x.split('?')[1];
-
-    if(x.split('/ykea/')[1] == 'comparator/'){
-        answer = '?category=0';
-    }
-
-    if(window.location.href.indexOf("category=&") > 0){
-        answer = x.split('category=')[1];
-    }
-
-    if(x.split('&price=')[1] == ''){
-        answer = answer.split('price')[0];
-    } else if (x.split('price=')[1] == '') {
-       answer = answer.split('price')[0];
-    }
-
-    callYkea(answer);
-}
-
 function compare(){
     var answer='';
 
@@ -143,6 +122,27 @@ function compare(){
 
 	console.log(answer);
 	
+    callYkea(answer);
+}
+
+function principal(){
+    var x = document.URL;
+    answer = x.split('?')[1];
+
+    if(x.split('/ykea/')[1] == 'comparator/'){
+        answer = '?category=0';
+    }
+
+    if(window.location.href.indexOf("category=&") > 0){
+        answer = x.split('category=')[1];
+    }
+
+    if(x.split('&price=')[1] == ''){
+        answer = answer.split('price')[0];
+    } else if (x.split('price=')[1] == '') {
+       answer = answer.split('price')[0];
+    }
+
     callYkea(answer);
 }
 
