@@ -240,12 +240,12 @@ def comparator(request, ips):
 
 @permission_classes((IsCommercialOrReadOnly, ))
 class ItemViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows Items to be viewed or edited.
-    """
-    queryset = Item.objects.all().order_by('item_number')
-    serializer_class = ItemSerializer
-	
+	"""
+	API endpoint that allows Items to be viewed or edited.
+	"""
+	queryset = Item.objects.all().order_by('item_number')
+	serializer_class = ItemSerializer
+
 	def get_queryset(self):
 		queryset = Item.objects.all().order_by('item_number')
 
