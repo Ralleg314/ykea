@@ -12,8 +12,6 @@ from .serializers import ItemSerializer
 from .permissions import IsCommercialOrReadOnly
 from rest_framework.decorators import permission_classes
 
-  
-
 def index(request):
     items = Item.CATEGORIES
     context = {'items':items}
@@ -237,28 +235,26 @@ def comparator(request, ips):
     
     return render(request, 'ykea/comparator.html', context)
 
-
 @permission_classes((IsCommercialOrReadOnly, ))
 class ItemViewSet(viewsets.ModelViewSet):
-	"""
-	API endpoint that allows Items to be viewed or edited.
-	"""
-	queryset = Item.objects.all().order_by('item_number')
-	serializer_class = ItemSerializer
-
-	def get_queryset(self):
-		queryset = Item.objects.all().order_by('item_number')
-
-		category = self.request.query_params.get('category', None)
-		if category is not None:
-			queryset = queryset.filter(category=category)
-
-		new = self.request.query_params.get('new', None)
-		if new is not None:
-			queryset = queryset.filter(is_new=new)
-
-		price = self.request.query_params.get('price', None)
-		if price is not None:
-			queryset = queryset.filter(price__lte=price)
-		
-		return queryset
+    """
+    API endpoint that allows Items to be viewed or edited.
+    """
+    queryset = Item.objects.all().order_by('item_number')
+    serializer_class = ItemSerializer
+    def get_queryset(self):
+        queryset = Item.objects.all().order_by('item_number')
+        
+        category = self.request.query_params.get('category', None)
+        if category is not None:
+            queryset = queryset.filter(category=category)
+            
+        new = self.request.query_params.get('new', None)
+        if new is not None:
+            queryset = queryset.filter(is_new=new)
+            
+        price = self.request.query_params.get('price', None)
+        if price is not None:
+            queryset = queryset.filter(price__lte=price)
+        
+        return queryset
