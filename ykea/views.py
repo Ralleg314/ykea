@@ -245,7 +245,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     """
     queryset = Item.objects.all().order_by('item_number')
     serializer_class = ItemSerializer
-    
+	
 	def get_queryset(self):
 		queryset = Item.objects.all().order_by('item_number')
 
