@@ -101,6 +101,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
 <script>
+
 if($('#category').val() || $('#price').val() || $('#is_new').active){
     document.getElementById("demo").innerHTML = principal();
 }
@@ -109,7 +110,7 @@ function compare(){
     var answer='';
 
     var cat = $('#category').val();
-    var price = $('#price').val();
+    var price = $('#text').val();
     if(cat!=='0'){
         answer+='&category='+cat;
     }
@@ -117,11 +118,12 @@ function compare(){
         answer+='&price='+price;
     }
     var n='';
-    if($('#is_new').prop('checked')){
-        answer+='&new=True';
-    }else{
-		answer+='&new=False';
-	}
+    if($('#y').prop('checked')){
+        answer+='&new='+$('#y').val();
+    }
+    else if($('#n').prop('checked')){
+        answer+='&new='+$('#n').val();
+    }
 
     callYkea(answer);
 }
