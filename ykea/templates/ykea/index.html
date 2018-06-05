@@ -41,9 +41,11 @@
         <ul class="nav navbar-nav navbar-left">
             <li><a class="navbar-brand" href="{% url 'index' %}">ykea ></a></li>
         </ul>
+		
 		<ul class="nav navbar-nav navbar-center">
 			<li><a class="navbar-brand" href="{% url 'comparator' %}">Comparator</a></li>
         </ul>
+		
         <ul class="nav navbar-nav navbar-right">
             {% if request.user.is_authenticated %}
                 <li><a class="navbar-brand">Hola {{request.user}}</a></li>
