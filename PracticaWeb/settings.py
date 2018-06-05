@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+	'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+	'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'PracticaWeb.urls'
@@ -151,6 +154,9 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/ykea/accounts/login'
 LOGIN_REDIRECT_URL='/ykea'
 LOGOUT_REDIRECT_URL='/ykea'
+CORS_URLS_REGEX = r'^/api/.*$'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
