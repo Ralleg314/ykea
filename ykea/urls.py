@@ -17,5 +17,5 @@ urlpatterns = [
     url(r'^accounts/login/*', login , name='login_view'),
     url(r'^accounts/logout/*', logout, name='logout_view'),
     url(r'^register/$', views.register, name='register'),
-    url(r'^comparator/$', views.comparator, {'ips': listOfAddresses}, name='comparator'),
+    url(r'^comparator$', views.comparator, {'ips': listOfAddresses}, name='comparator'),
 ]
