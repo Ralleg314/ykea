@@ -86,7 +86,7 @@
     <!--I use a default value for price-->
     <left>
         <div class="form-row">
-            <label for="c1">Max price</label>
+            <label for="price">Max price</label>
             <input type="number" value="1000" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price"/>
         </div>
     </left>
@@ -102,7 +102,7 @@
 
 <script type="text/javascript">
 
-if($('#category').val() || $('#text').val() || $('#y').active && $('#n').active){
+if($('#category').val() || $('#price').val() || $('#y').active && $('#n').active){
     document.getElementById("demo").innerHTML = principal();
 }
 
@@ -150,6 +150,7 @@ function principal(){
 
     callYkea(answer);
 }
+
 function callYkea(answer){
     $('.product').empty();
     var requests=[];
