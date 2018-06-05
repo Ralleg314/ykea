@@ -92,11 +92,111 @@
         </div>
     </left>
 
-    <left><button value="Compare" class="btn btn-info btn-sm">Compare</button></left>
+    <left><button value="Compare" class="btn btn-info btn-sm" onclick="compare(this)">Compare</button></left>
     <br>
 </form>
 </body>
 
 <script>
+
+if($('#cat').val() || $('#text').val() || $('#y').active && $('#n').active){
+    document.getElementById("demo").innerHTML = principal();
+}
+
+function compare(){
+    var answer='';
+
+    var cat = $('#cat').val();
+    var price = $('#text').val();
+    if(cat!=='0'){
+        answer+='&category='+cat;
+    }
+    if(price!==''){
+        answer+='&price='+price;
+    }
+    var n='';
+    if($('#y').prop('checked')){
+        answer+='&new='+$('#y').val();
+    }
+    else if($('#n').prop('checked')){
+        answer+='&new='+$('#n').val();
+    }
+
+    callYkea(answer);
+}
+
+function principal(){
+    var x = document.URL;
+    answer = x.split('?')[1];
+
+    if(x.split('/ykea/')[1] == 'comparator/'){
+        answer = '?category=0';
+    }
+
+    if(window.location.href.indexOf("category=&") > 0){
+        answer = x.split('category=')[1];
+    }
+
+    if(x.split('&price=')[1] == ''){
+        answer = answer.split('price')[0];
+    } else if (x.split('price=')[1] == '') {
+       answer = answer.split('price')[0];
+    }
+
+    callYkea(answer);
+}
+function callYkea(answer){
+    $('.product').empty();
+    var requests=[];
+    var ips =['https://sd2018-ykeaa3.herokuapp.com', 'https://sd2018-ykeaa10.herokuapp.com', 'https://sd2018-ykea-a9.herokuapp.com', 'https://sd2018-ykeaa07.herokuapp.com'];
+    var items = [];
+
+    for (var i=0; i<ips.length; i++){
+        requests.push(
+            $.ajax(
+                {url: ips[i]+'/api/items/?'+answer, type: 'GET', dataType: 'json',
+                error: function (jqXHR, exception){
+                    var msg ='';
+                    if(jqXHR.status === 0){
+                        msg = 'Not connect.\nVerify Network.';
+                    } else if (jqXHR.status === 404){
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status === 500){
+                        msg = 'Internal Server Error. [500]'
+                    } else if (exception === 'parseerror'){
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout'){
+                        msg = 'Time out error.';
+                    } else if (exception ==='abort'){
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    er = jqXHR.responseText
+                    <!--$("<h3>").text(msg).appendTo("body");-->
+                    console.log("Error: "+msg)
+                },
+                    success: function (data) {
+                        for(var i=0; i<data['results'].length;i++){
+                            items.push(data['results'][i]);
+
+                        }
+                    }
+
+
+                }
+            )
+        );
+    }
+    $.when.apply($,requests).done(function () {
+        items.sort((a, b) => b - a)
+        for(var i=0; i<items.length;i++){
+            var dep = "url: "+items[i]['url']
+            var item = "Item: "+items[i]['name']+ ", New: "+items[i]['is_new']+", Price: "+items[i]['price']
+            var ima="<ul class=\"cart_list\"><div class=\"cart_item_image\"><li class =\"cart_item clearfix\"> <div class=\"cart_item_image\"><img width=100px src="+items[i]['featured_photo']+"></div></div>"
+            $("<h5>").html(ima).appendTo(".product");
+            $("<h5>").html(dep).appendTo(".product");
+            $("<h5>").text(item).appendTo(".product");
+        }
+    });
+}
 
 </script>
