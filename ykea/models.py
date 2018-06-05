@@ -41,7 +41,7 @@ class Client(models.Model):
     #id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     money = models.DecimalField(max_digits=12, decimal_places=2)
-    commercial = models.BooleanField(default=False)
+    #commercial = models.BooleanField(default=False)
     def __str__(self):
         return (self.user.username +" " + str(self.money))
     
