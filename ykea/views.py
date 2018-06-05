@@ -212,6 +212,12 @@ def register(request):
     return render(request, "registration/register.html", {
         'form': form,
     })
+	
+def comparator(request, ips):
+    items = Item.CATEGORIES
+    context = {'items':items,'ips':ips}
+    
+    return render(request, 'ykea/comparator.html', context)
         
 def view_bills(request):
     context = {'bills' : Bill.objects.filter(user=Client.objects.get(user=request.user))}
