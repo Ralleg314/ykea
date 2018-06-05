@@ -125,7 +125,7 @@ function compare(){
     callYkea(answer);
 }
 
-function principal(){
+/*function principal(){
     var x = document.URL;
     answer = x.split('?')[1];
 
@@ -144,12 +144,12 @@ function principal(){
     }
 
     callYkea(answer);
-}
+}*/
 
 function callYkea(answer){
     $('.product').empty();
     var requests=[];
-    var ips =['https://sd2018-ykeaa3.herokuapp.com', 'https://sd2018-ykeaa10.herokuapp.com', 'https://sd2018-ykea-a9.herokuapp.com', 'https://sd2018-ykeaa07.herokuapp.com'];
+    var ips =['https://sd2018-ykeaa-a1.herokuapp.com', 'https://sd2018-ykeaa3.herokuapp.com', 'https://sd2018-ykeaa10.herokuapp.com', 'https://sd2018-ykea-a9.herokuapp.com', 'https://sd2018-ykeaa07.herokuapp.com'];
     var items = [];
 
     for (var i=0; i<ips.length; i++){
