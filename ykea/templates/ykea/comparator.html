@@ -106,9 +106,10 @@ function compare(){
     var answer='';
 
     var cat = $('#category').val();
-	answer+='&category='+cat;
-	
-    var price = $('#price').val();    
+    var price = $('#price').val();
+    if(cat!=='0'){
+        answer+='&category='+cat;
+    }
     if(price!==''){
         answer+='&price='+price;
     }
@@ -149,7 +150,7 @@ function principal(){
 function callYkea(answer){
     $('.product').empty();
     var requests=[];
-    var ips = ['sd2018-ykea-a1.herokuapp.com', 'sd2018-ykea-a2.herokuapp.com', 'sd2018-ykeaa3.herokuapp.com', 'sd2018-ykeaa4.herokuapp.com', 'sd2018-ykea5.herokuapp.com', 'sd2018ykeaa6.herokuapp.com', 'sd2018-ykeaa07.herokuapp.com', 'sd2018-ykeaa8.herokuapp.com', 'sd2018-ykea-a9.herokuapp.com', 'sd2018-ykeaa10.herokuapp.com', 'sd2018ykeaa11.herokuapp.com'];
+    var ips =['https://sd2018-ykeaa3.herokuapp.com', 'https://sd2018-ykeaa10.herokuapp.com', 'https://sd2018-ykea-a9.herokuapp.com', 'https://sd2018-ykeaa07.herokuapp.com'];
     var items = [];
 
     for (var i=0; i<ips.length; i++){
