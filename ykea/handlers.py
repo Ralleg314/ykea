@@ -1,6 +1,6 @@
 from corsheaders.signals import check_request_enabled
 
-from .models import MySite
+from .models import ykea
 
 def cors_allow_api_to_everyone(sender, request, **kwargs):
     return request.path.startswith('/api/')
