@@ -62,47 +62,38 @@
       </div>
     </nav>
     
-    <<div class="row">
-        <div class="col">
-<br>
-    <center><select id="cat" name="category">
-       <option selected="" value="0">______Choose a category_____ </option>
-           <option value="beds">Beds &amp; mattresses</option>
-           <option value="cook">Cookware</option>
-           <option value="diy">Do-it-yourself</option>
-           <option value="deco">Decoration &amp; mirrors</option>
-           <option value="floor">Flooring</option>
-           <option value="food">Food &amp; beverages</option>
-           <option value="furn">Furniture, wardrebes &amp; shelves</option>
-           <option value="leis">Leisure</option>
-           <option value="light">Lighting</option>
-           <option value="org">Organisers &amp; storage accesories</option>
-           <option value="plant">Plants &amp; gardering</option>
-           <option value="safe">Safety</option>
-           <option value="sofa">Sofas &amp; armchairs</option>
-           <option value="table">Tables &amp; chairs</option>
-           <option value="tablw">Tableware</option>
-           <option value="taps">Taps &amp; sinks</option>
-           <option value="texti">Textiles</option>
-           <option value="toys">Toys</option>
-       
-    </select></center>
+    <br>
+    <left>
+        <label for="Category">Category:  </label> <select name="category">
+                        {% if items %}
+                                <ul >
+                                {% for item, description in items %}
+                                    <option value={{item}}>{{item}}</option>
+                                {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No categories are available.</p>
+                            {% endif %}
+        
+        </select>
+    </left>
+    <br>
+    <left>
+        <label for="new">New:  </label>
+        <input name="is_new" value="True" type="checkbox">
+    </left>
 
-    <center>
-        <label> New:  </label>
-        <input id="y" name="new" value="yes" type="checkbox">Yes
-        <input id="n" name="new" value="no" type="checkbox">No
-    </center>
+    <!--I use a default value for price-->
+    <left>
+        <div class="form-row">
+            <label for="c1">Max price</label>
+            <input type="number" value="1000" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="c1" name="price"/>
+        </div>
+    </left>
 
-    <center><textarea id="text" rows="1" cols="2" style="border: none" placeholder="  price"></textarea></center>
-
-    <center><button onclick="compare(this)" class="btn btn-info btn-sm">Compare</button></center>
-
-    <div class="product"></div>
-    <!--<button >Compare</button>-->
-    <!--<div class="#product"></div>-->
-</div>
-    </div>
+    <left><button class="btn btn-info btn-sm" onclick="compare(this)">Compare</button></left>
+    <br>
+	<div class="product"></div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -118,7 +109,7 @@ if($('#cat').val() || $('#text').val() || $('#y').active && $('#n').active){
 function compare(){
     var answer='';
 
-    var cat = $('#cat').val();
+    var cat = $('#category').val();
     var price = $('#text').val();
     if(cat!=='0'){
         answer+='&category='+cat;
