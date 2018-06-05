@@ -114,14 +114,14 @@ function compare(){
         answer+='&price='+price;
     }
     var n='';
-    if($('#y').prop('checked')){
-        answer+='&new='+$('#y').val();
+    if($('#is_new').prop('checked')){
+        answer+='&new=True';
     }
     else if($('#n').prop('checked')){
-        answer+='&new='+$('#n').val();
+        answer+='&new=False';
     }
 
-	yield answer;
+	console.log(answer);
 	
     callYkea(answer);
 }
