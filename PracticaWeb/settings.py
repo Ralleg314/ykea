@@ -154,7 +154,7 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/ykea/accounts/login'
 LOGIN_REDIRECT_URL='/ykea'
 LOGOUT_REDIRECT_URL='/ykea'
-CORS_URLS_REGEX = r'^/api/.*$'
+CORS_URLS_REGEX = '/api/.*$'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
