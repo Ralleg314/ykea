@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Item, ShoppingCart, CartItem, Client, Bill
+from .models import Item, ShoppingCart, CartItem, Client, Bill, BillItem
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from .serializers import ItemSerializer
+from .permissions import IsCommercialOrReadOnly
+from rest_framework.decorators import permission_classes
 
   
 
@@ -162,7 +164,14 @@ def cartCheckOut(request):
     cliente.money = dinero-totalprice
     cliente.save()
     
-    context ={'cartItems' : [(itemCart.item,itemCart.quantity) for itemCart in CartItem.objects.filter(cart = request.session["cart"])], 'money' : Client.objects.get(user=request.user).money, 'totalprice' : totalprice}
+    bill = Bill.objects.create(user=Client.objects.get(user=request.user),total = totalprice)
+    itemsBought = []
+    for itemCart in CartItem.objects.filter(cart = request.session["cart"]):
+        billline = BillItem.objects.create(quantity = itemCart.quantity, cart = bill, item = itemCart.item)
+        
+        itemsBought.append((itemCart.item,itemCart.quantity))
+
+    context ={'cartItems' : itemsBought, 'money' : Client.objects.get(user=request.user).money, 'totalprice' : totalprice}
     cart.delete()
     del request.session["cart"]
     del request.session["selectedItem"]
@@ -225,6 +234,7 @@ def view_bills(request):
         context['money'] = Client.objects.get(user=request.user).money
     return render(request, 'ykea/bills.html', context)
 
+@permission_classes((IsCommercialOrReadOnly, ))
 class ItemViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Items to be viewed or edited.
