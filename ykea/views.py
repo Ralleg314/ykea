@@ -259,6 +259,5 @@ class ItemViewSet(viewsets.ModelViewSet):
             
         price = self.request.query_params.get('price', None)
         if price is not None:
-            queryset = queryset.filter(price__lte=price)
-        
-		return queryset
+			queryset = queryset.filter(price__lte=price)
+        return queryset
