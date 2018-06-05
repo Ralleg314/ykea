@@ -106,10 +106,9 @@ function compare(){
     var answer='';
 
     var cat = $('#category').val();
+	answer+='&category='+cat;
+	
     var price = $('#price').val();
-    if(cat!=='0'){
-        answer+='&category='+cat;
-    }
     if(price!==''){
         answer+='&price='+price;
     }
