@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Item, ShoppingCart, CartItem, Client
+from .models import Item, ShoppingCart, CartItem, Client, Bill
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
