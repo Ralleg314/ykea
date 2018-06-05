@@ -102,9 +102,6 @@
 
 <script>
 
-if($('#category').val() || $('#price').val() || $('#is_new').active){
-    document.getElementById("demo").innerHTML = principal();
-}
 
 function compare(){
     var answer='';
@@ -118,12 +115,11 @@ function compare(){
         answer+='&price='+price;
     }
     var n='';
-    if($('#y').prop('checked')){
-        answer+='&new='+$('#y').val();
-    }
-    else if($('#n').prop('checked')){
-        answer+='&new='+$('#n').val();
-    }
+    if($('#is_new').prop('checked')){
+        answer+='&new=True';
+    }else{
+		answer+='&new=False';
+	}
 
     callYkea(answer);
 }
