@@ -64,7 +64,7 @@
     
     <br>
     <left>
-        <label for="Category">Category:  </label> <select name="category">
+        <label for="Category">Category:  </label> <select id="category">
                         {% if items %}
                                 <ul >
                                 {% for item, description in items %}
@@ -80,14 +80,14 @@
     <br>
     <left>
         <label for="new">New:  </label>
-        <input name="is_new" value="True" type="checkbox">
+        <input id="is_new" value="True" type="checkbox">
     </left>
 
     <!--I use a default value for price-->
     <left>
         <div class="form-row">
             <label for="c1">Max price</label>
-            <input type="number" value="1000" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="c1" name="price"/>
+            <input type="number" value="1000" min="0" step="10" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price"/>
         </div>
     </left>
 
