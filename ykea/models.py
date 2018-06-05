@@ -41,14 +41,13 @@ class Client(models.Model):
     #id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     money = models.DecimalField(max_digits=12, decimal_places=2)
-    #comercial = models.BooleanField(default=False)
     def __str__(self):
         return (self.user.username +" " + str(self.money))
     
-'''class Comercial(models.Model):
+class Comercial(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
-        return (self.user.username)'''
+        return (self.user.username)
 
 class ShoppingCart(models.Model):
     #id = models.CharField(max_length=8, unique=True)
@@ -69,7 +68,8 @@ class CartItem(models.Model):
     id = models.AutoField(primary_key=True)
     quantity = models.IntegerField()
     cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE) #solo queremos un item de cada en el shoppingcart, el numero lo determina quantity
+
 
 
 
