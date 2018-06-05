@@ -180,5 +180,9 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
 )
 
+CORS_ORIGIN_WHITELIST = (
+    'sd2018-ykea-a1.herokuapp.com',
+)
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
