@@ -217,7 +217,7 @@ def view_bills(request):
     context = {'bills' : Bill.objects.filter(user=Client.objects.get(user=request.user))}
     if request.user.is_authenticated():
         context['money'] = Client.objects.get(user=request.user).money
-	return render(request, 'ykea/bills.html', context)
+    return render(request, 'ykea/bills.html', context)
 
 class ItemViewSet(viewsets.ModelViewSet):
     """
@@ -241,7 +241,7 @@ class ItemViewSet(viewsets.ModelViewSet):
         if price is not None:
             queryset = queryset.filter(price__lte=price)
         
-		return queryset
+        return queryset
 		
 
 
