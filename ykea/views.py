@@ -213,10 +213,35 @@ def register(request):
         'form': form,
     })
         
+def view_bills(request):
+    context = {'bills' : Bill.objects.filter(user=Client.objects.get(user=request.user))}
+    if request.user.is_authenticated():
+        context['money'] = Client.objects.get(user=request.user).money
+	return render(request, 'ykea/bills.html', context)
 
 class ItemViewSet(viewsets.ModelViewSet):
-            """
-            API endpoint that allows Items to be viewed or edited.
-            """
-            queryset = Item.objects.all().order_by('item_number')
-serializer_class = ItemSerializer
+    """
+    API endpoint that allows Items to be viewed or edited.
+    """
+    queryset = Item.objects.all().order_by('item_number')
+    serializer_class = ItemSerializer
+    
+    def get_queryset(self):
+        queryset = Item.objects.all().order_by('item_number')
+        
+        category = self.request.query_params.get('category', None)
+        if category is not None:
+            queryset = queryset.filter(category=category)
+            
+        new = self.request.query_params.get('new', None)
+        if new is not None:
+            queryset = queryset.filter(is_new=new)
+            
+        price = self.request.query_params.get('price', None)
+        if price is not None:
+            queryset = queryset.filter(price__lte=price)
+        
+		return queryset
+		
+
+
