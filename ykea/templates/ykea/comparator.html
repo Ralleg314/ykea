@@ -105,7 +105,8 @@
 function compare(){
     var search='';
 
-	search+='&category='+('#category').val();
+    var category = $('#category').val();
+	search+='&category='+category;
 	
     var price = $('#price').val();
     if(price!==''){
