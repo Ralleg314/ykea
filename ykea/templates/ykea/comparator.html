@@ -93,7 +93,7 @@
 
     <left><button class="btn btn-info btn-sm" onclick="compare(this)">Compare</button></left>
     <br>
-	<div class="product"></div>
+	<div id="product" class=></div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -123,7 +123,7 @@ function compare(){
     $('.product').empty();
     var requests=[];
     var ips =['https://sd2018-ykea-a1.herokuapp.com', 'https://sd2018-ykeaa3.herokuapp.com', 'https://sd2018-ykeaa4.herokuapp.com', 'https://sd2018-ykeaa07.herokuapp.com', 'https://sd2018-ykea-a9.herokuapp.com', 'https://sd2018-ykeaa10.herokuapp.com'];
-    var items = [];
+    var results = [];
 
     for (var i=0; i<ips.length; i++){
         requests.push(
@@ -150,7 +150,7 @@ function compare(){
                 },
                     success: function (data) {
                         for(var i=0; i<data['results'].length;i++){
-                            items.push(data['results'][i]);
+                            results.push(data['results'][i]);
 
                         }
                     }
@@ -161,14 +161,20 @@ function compare(){
         );
     }
     $.when.apply($,requests).done(function () {
-        items.sort((a, b) => b - a)
-        for(var i=0; i<items.length;i++){
-            var dep = "url: "+items[i]['url']
-            var item = "Item: "+items[i]['name']+ ", New: "+items[i]['is_new']+", Price: "+items[i]['price']
-            var ima="<ul class=\"cart_list\"><div class=\"cart_item_image\"><li class =\"cart_item clearfix\"> <div class=\"cart_item_image\"><img width=100px src="+items[i]['featured_photo']+"></div></div>"
-            $("<h5>").html(ima).appendTo(".product");
-            $("<h5>").html(dep).appendTo(".product");
-            $("<h5>").text(item).appendTo(".product");
+        results.sort((a, b) => b - a)
+        var name, description, img, price, origin;
+			for (var i=0; i < results.length; i++) {
+				name = results[i]['name'];
+				description = results[i]['description'];
+				price = results[i]['price'];
+				img = results[i]['featured_photo'];
+				origin = results[i]['origin']
+				name = $("<div/>").text(name).html();
+				description = $("<div/>").text(description).html();
+				price = $("<div/>").text(price).html();
+				img = $("<div/>").text(img).html();
+
+				$("#results").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='http://" + origin + "/ykea'>" + origin + "/ykea</a>!</p></div></div>"));
         }
     });
 }
