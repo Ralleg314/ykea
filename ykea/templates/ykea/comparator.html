@@ -93,7 +93,7 @@
 
     <left><button class="btn btn-info btn-sm" onclick="compare(this)">Compare</button></left>
     <br>
-	<div id="product"></div>
+	<div class="product"></div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -162,19 +162,13 @@ function compare(){
     }
     $.when.apply($,requests).done(function () {
         results.sort((a, b) => b - a)
-        var name, description, img, price, origin;
-			for (var i=0; i < results.length; i++) {
-				name = results[i]['name'];
-				description = results[i]['description'];
-				price = results[i]['price'];
-				img = results[i]['featured_photo'];
-				origin = results[i]['origin']
-				name = $("<div/>").text(name).html();
-				description = $("<div/>").text(description).html();
-				price = $("<div/>").text(price).html();
-				img = $("<div/>").text(img).html();
-
-				$("#product").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='http://" + origin + "/ykea'>" + origin + "/ykea</a>!</p></div></div>"));
+        for(var i=0; i<results.length;i++){
+            var dep = "url: "+results[i]['url']
+            var item = "Item: "+results[i]['name']+ ", New: "+results[i]['is_new']+", Price: "+results[i]['price']
+            var ima="<ul class=\"cart_list\"><div class=\"cart_item_image\"><li class =\"cart_item clearfix\"> <div class=\"cart_item_image\"><img width=100px src="+results[i]['featured_photo']+"></div></div>"
+            $("<h5>").html(ima).appendTo(".product");
+            $("<h5>").html(dep).appendTo(".product");
+            $("<h5>").text(item).appendTo(".product");
         }
     });
 }
