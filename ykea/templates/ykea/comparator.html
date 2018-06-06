@@ -159,21 +159,23 @@ function compare(){
         );
     }
 	
-	results.sort((a, b) => b - a)
-	var name, description, img, price, url;
-	for(var i=0; i<results.length;i++){
-		name = results[i]['name'];
-			description = results[i]['description'];
-			price = results[i]['price'];
-			img = results[i]['featured_photo'];
-			url = results[i]['url']
-			
-			// Escape them
-			name = $("<div/>").text(name).html();
-			description = $("<div/>").text(description).html();
-			price = $("<div/>").text(price).html();
-			
-			img = $("<div/>").text(img).html();$("#product").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='" + url + "'>" + url + "</a>!</p></div></div>"));
+    $.when.apply($,requests).done(function () {
+        results.sort((a, b) => b - a)
+		var name, description, img, price, url;
+        for(var i=0; i<results.length;i++){
+            name = results[i]['name'];
+				description = results[i]['description'];
+				price = results[i]['price'];
+				img = results[i]['featured_photo'];
+				url = results[i]['url']
+				
+				// Escape them
+				name = $("<div/>").text(name).html();
+				description = $("<div/>").text(description).html();
+				price = $("<div/>").text(price).html();
+				
+				img = $("<div/>").text(img).html();$("#product").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='" + url + "'>" + url + "</a>!</p></div></div>"));
+        }
 	}
 }
 
