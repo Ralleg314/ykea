@@ -234,7 +234,6 @@ def view_bills(request):
         context['money'] = Client.objects.get(user=request.user).money
     return render(request, 'ykea/bills.html', context)
 
-@permission_classes((IsCommercialOrReadOnly, ))
 class ItemViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Items to be viewed or edited.
