@@ -103,32 +103,31 @@
 <script type="text/javascript">
 
 function compare(){
-    var answer='';
+    var search='';
 
-    var cat = $('#category').val();
-	answer+='&category='+cat;
+	search+='&category='+('#category').val();
 	
     var price = $('#price').val();
     if(price!==''){
-        answer+='&price='+price;
+        search+='&price='+price;
     }
-    var n='';
+	
     if($('#is_new').prop('checked')){
-        answer+='&new=True';
+        search+='&new=True';
     }
     else{
-        answer+='&new=False';
+        search+='&new=False';
     }
 
     $('.product').empty();
     var requests=[];
-    var ips =['sd2018-ykea-a1.herokuapp.com', 'sd2018-ykea-a2.herokuapp.com', 'sd2018-ykeaa3.herokuapp.com', 'sd2018-ykeaa4.herokuapp.com', 'sd2018-ykea5.herokuapp.com', 'sd2018ykeaa6.herokuapp.com', 'sd2018-ykeaa07.herokuapp.com', 'sd2018-ykeaa8.herokuapp.com', 'sd2018-ykea-a9.herokuapp.com', 'sd2018-ykeaa10.herokuapp.com', 'sd2018ykeaa11.herokuapp.com'];
+    var ips =['sd2018-ykea-a1.herokuapp.com', 'sd2018-ykea-a2.herokuapp.com', 'sd2018-ykeaa3.herokuapp.com', 'sd2018-ykeaa4.herokuapp.com', 'sd2018-ykeaa8.herokuapp.com', 'sd2018-ykea-a9.herokuapp.com', 'sd2018-ykeaa10.herokuapp.com'];
     var items = [];
 
     for (var i=0; i<ips.length; i++){
         requests.push(
             $.ajax(
-                {url: ips[i]+'/api/items/?'+answer, type: 'GET', dataType: 'json',
+                {url: ips[i]+'/api/items/?'+search, type: 'GET', dataType: 'json',
                 error: function (jqXHR, exception){
                     var msg ='';
                     if(jqXHR.status === 0){
