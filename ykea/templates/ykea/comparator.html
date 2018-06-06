@@ -106,7 +106,7 @@ function compare(){
     var search='';
 
     var category = $('#category').val();
-	search+='&category='+category;
+	search+='&category='+cat;
 	
     var price = $('#price').val();
     if(price!==''){
@@ -122,7 +122,7 @@ function compare(){
 
     $('.product').empty();
     var requests=[];
-    var ips =['sd2018-ykea-a1.herokuapp.com', 'sd2018-ykea-a2.herokuapp.com', 'sd2018-ykeaa3.herokuapp.com', 'sd2018-ykeaa4.herokuapp.com', 'sd2018-ykeaa8.herokuapp.com', 'sd2018-ykea-a9.herokuapp.com', 'sd2018-ykeaa10.herokuapp.com'];
+    var ips =['sd2018-ykea-a1.herokuapp.com', 'sd2018-ykea-a2.herokuapp.com', 'sd2018-ykeaa3.herokuapp.com', 'sd2018-ykeaa4.herokuapp.com', 'sd2018-ykea5.herokuapp.com', 'sd2018ykeaa6.herokuapp.com', 'sd2018-ykeaa07.herokuapp.com', 'sd2018-ykeaa8.herokuapp.com', 'sd2018-ykea-a9.herokuapp.com', 'sd2018-ykeaa10.herokuapp.com', 'sd2018ykeaa11.herokuapp.com'];
     var items = [];
 
     for (var i=0; i<ips.length; i++){
