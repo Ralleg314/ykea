@@ -151,14 +151,15 @@ function compare(){
                     success: function (data) {
                         for(var i=0; i<data['results'].length;i++){
                             results.push(data['results'][i]);
+
                         }
                     }
+
 
                 }
             )
         );
     }
-	
     $.when.apply($,requests).done(function () {
         results.sort((a, b) => b - a)
 		var name, description, img, price, url;
@@ -176,7 +177,7 @@ function compare(){
 				
 				img = $("<div/>").text(img).html();$("#product").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='" + url + "'>" + url + "</a>!</p></div></div>"));
         }
-	}
+    });
 }
 
 </script>
