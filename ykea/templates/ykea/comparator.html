@@ -174,7 +174,7 @@ function compare(){
 				price = $("<div/>").text(price).html();
 				img = $("<div/>").text(img).html();
 
-				$("#results").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='http://" + origin + "/ykea'>" + origin + "/ykea</a>!</p></div></div>"));
+				$("#product").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='http://" + origin + "/ykea'>" + origin + "/ykea</a>!</p></div></div>"));
         }
     });
 }
