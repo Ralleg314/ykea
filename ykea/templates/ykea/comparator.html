@@ -166,7 +166,7 @@ function compare(){
             var at = "url: "+results[i]['url']
             var item = "Item: "+results[i]['name']+ ", New: "+results[i]['is_new']+", Price: "+results[i]['price']
             var img ="<ul class=\"cart_list\"><div class=\"cart_item_image\"><li class =\"cart_item clearfix\"> <div class=\"cart_item_image\"><img width=100px src="+results[i]['featured_photo']+"></div></div>"
-            $("#product").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href={{at}}</a>{{at}}</p></div></div>"));
+            $("#product").append($("<div class='col-lg-9'>").html("<div class='card mt-4'> <img class='card-img-top img-fluid' src=" + img + " alt=" + name + "><div class='card-body'><h3 class='card-title'>" + name + "</h3><h4>" + price + "€</h4><p class='card-text'>" + description + "</p><p> At <a target='_blank' href='http://" + at + "'>" + origin + "/ykea</a>!</p></div></div>"));
         }
     });
 }
